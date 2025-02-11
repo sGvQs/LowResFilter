@@ -6,7 +6,6 @@ import * as MediaLibrary from 'expo-media-library';
 import { type ImageSource } from 'expo-image';
 import { captureRef } from 'react-native-view-shot';
 import domtoimage from 'dom-to-image';
-import * as ImageManipulator from 'expo-image-manipulator';
 
 import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
@@ -38,18 +37,11 @@ export default function Index() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: true,
-      quality: 1, // 一旦高画質で取得
+      quality: 1,
     });
 
     if (!result.canceled) {
-      // 解像度を落とす（幅 100px, 高さ 100px に変更）
-      const manipulatedImage = await ImageManipulator.manipulateAsync(
-        result.assets[0].uri,
-        [{ resize: { width: 100, height: 100 } }], // 低解像度化
-        { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG } // JPEG 圧縮
-      );
-
-      setSelectedImage(manipulatedImage.uri);
+      setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
     } else {
       alert('You did not select any image.');
