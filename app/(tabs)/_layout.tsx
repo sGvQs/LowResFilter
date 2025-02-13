@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 
 import Entypo from '@expo/vector-icons/Entypo';
+import { Platform } from 'react-native';
 
 export default function TabLayout() {
   return (
@@ -14,7 +15,12 @@ export default function TabLayout() {
         headerTintColor: '#ffffff',
         tabBarStyle: {
           backgroundColor: '#d4d0c7',
+          paddingHorizontal: Platform.OS === 'web' ? 10 : 0, // Web のみ余白をつける
         },
+        tabBarItemStyle:
+          Platform.OS === 'web'
+            ? { alignSelf: 'center', maxWidth: 100 } // Web のみ適用
+            : { justifyContent: 'center', alignItems: 'center' }, // iOS・Android は中央寄せ
       }}
     >
       <Tabs.Screen
