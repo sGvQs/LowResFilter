@@ -86,6 +86,7 @@ export default function Photo() {
       try {
         const localUri = await captureRef(imageRef, {
           height: imageSize?.height,
+          width: imageSize?.width,
           quality: 1,
         });
 
@@ -109,7 +110,7 @@ export default function Photo() {
         });
 
         let link = document.createElement('a');
-        link.download = 'sticker-smash.jpeg';
+        link.download = 'low-res-filter.jpeg';
         link.href = dataUrl;
         link.click();
       } catch (e) {

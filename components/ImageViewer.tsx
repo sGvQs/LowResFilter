@@ -60,7 +60,11 @@ export default function ImageViewer({
   }
 
   return (
-    <Image source={imageSource} style={[styles.selectedImage, imageSize]} />
+    <Image
+      source={imageSource}
+      style={[styles.selectedImage, imageSize]}
+      contentFit="contain"
+    />
   );
 }
 
@@ -70,7 +74,6 @@ const styles = StyleSheet.create({
     height: 440,
   },
   selectedImage: {
-    marginTop: 50,
-    resizeMode: 'contain', // 元画像の比率を保持
+    marginTop: Platform.OS === 'web' ? 0 : 50,
   },
 });
