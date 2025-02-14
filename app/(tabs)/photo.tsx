@@ -179,13 +179,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    flex: 5 / 6,
+    flex: 3 / 4,
   },
   footerContainer: {
-    flex: 1 / 6,
+    flex: 1 / 4,
   },
   optionsContainer: {
-    flex: 1 / 6,
+    flex: 1 / 4,
   },
   optionsRow: {
     alignItems: 'center',

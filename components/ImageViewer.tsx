@@ -1,10 +1,15 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { StyleSheet, Image as RNImage, Dimensions, Text } from 'react-native';
+import { useEffect, Dispatch, SetStateAction } from 'react';
+import {
+  StyleSheet,
+  Image as RNImage,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import { Image, type ImageSource } from 'expo-image';
 import { importedImageSize } from '@/app/(tabs)/photo';
 
-const SCREEN_WIDTH = (Dimensions.get('window').width * 4) / 5; // 画面の横幅を取得
-const SCREEN_HEIGHT = (Dimensions.get('window').height * 4) / 5; // 画面の縦幅を取得
+const SCREEN_WIDTH = Dimensions.get('window').width; // 画面の横幅を取得
+const SCREEN_HEIGHT = Dimensions.get('window').height; // 画面の縦幅を取得
 
 type Props = {
   imgSource: ImageSource;
@@ -26,15 +31,18 @@ export default function ImageViewer({
       // ここでuriが存在するかチェック
       RNImage.getSize(imageSource.uri, (width, height) => {
         const aspectRatio = height / width;
+        const magnification = Platform.OS === 'web' ? 0.7 : 0.5;
         if (height > width) {
+          // 縦長イメージ
           setImageSize({
-            width: SCREEN_WIDTH,
-            height: SCREEN_WIDTH * aspectRatio,
+            width: SCREEN_WIDTH * 0.8,
+            height: SCREEN_WIDTH * aspectRatio * 0.8,
           });
         } else {
+          // 横長イメージ
           setImageSize({
-            width: SCREEN_HEIGHT * aspectRatio,
-            height: SCREEN_HEIGHT,
+            width: SCREEN_HEIGHT * aspectRatio * magnification,
+            height: SCREEN_HEIGHT * magnification,
           });
         }
       });
