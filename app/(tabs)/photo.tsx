@@ -17,26 +17,43 @@ import EmojiSticker from '@/components/EmojiSticker';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
+export type importedImageSize = {
+  width: number;
+  height: number;
+};
+
 export default function Photo() {
+  // ユーザーがアップロードした写真
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     undefined
   );
+
+  // [表示非表示] 写真をカスタマイズできる画面（アップロード => true）
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+
+  // [表示非表示] 絵文字を選択できるモーダル
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  // 選ばれた絵文字
   const [pickedEmoji, setPickedEmoji] = useState<ImageSource | undefined>(
     undefined
   );
+
+  const [imageSize, setImageSize] = useState<importedImageSize | null>(null);
+
+  //（カメラロールなど）へのアクセス許可をリクエスト
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const imageRef = useRef<View>(null);
 
+  // アクセス許可をリクエスト
   if (status === null) {
     requestPermission();
   }
 
+  // 写真を選ぶ「Choose a photo」
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
-      allowsEditing: true,
       quality: 1,
     });
 
@@ -48,23 +65,27 @@ export default function Photo() {
     }
   };
 
+  //「Reset」
   const onReset = () => {
     setShowAppOptions(false);
   };
 
+  //「＋」
   const onAddSticker = () => {
     setIsModalVisible(true);
   };
 
+  // モーダルを閉じる
   const onModalClose = () => {
     setIsModalVisible(false);
   };
 
+  // 「Save」
   const onSaveImageAsync = async () => {
     if (Platform.OS !== 'web') {
       try {
         const localUri = await captureRef(imageRef, {
-          height: 440,
+          height: imageSize?.height,
           quality: 1,
         });
 
@@ -82,9 +103,9 @@ export default function Photo() {
         }
 
         const dataUrl = await domtoimage.toJpeg(imageRef.current, {
-          quality: 0.95,
-          width: 320,
-          height: 440,
+          quality: 1,
+          width: imageSize?.width,
+          height: imageSize?.height,
         });
 
         let link = document.createElement('a');
@@ -99,18 +120,26 @@ export default function Photo() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
+      {/* イメージのコンテナー */}
       <View style={styles.imageContainer}>
+        {/* イメージ『例：編集済み写真 */}
         <View ref={imageRef} collapsable={false}>
+          {/* イメージ『例：アップロード写真』 */}
           <ImageViewer
             imgSource={PlaceholderImage}
             selectedImage={selectedImage}
+            setImageSize={setImageSize}
+            imageSize={imageSize}
           />
+          {/* イメージ『例：ステッカー』 */}
           {pickedEmoji && (
             <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
           )}
         </View>
       </View>
+      {/* フッターのコンテナー */}
       {showAppOptions ? (
+        // 写真選択後
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
             <IconButton icon="refresh" label="Reset" onPress={onReset} />
@@ -123,6 +152,7 @@ export default function Photo() {
           </View>
         </View>
       ) : (
+        // 写真選択前
         <View style={styles.footerContainer}>
           <Button
             theme="primary"
@@ -149,15 +179,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    flex: 1,
+    flex: 5 / 6,
   },
   footerContainer: {
-    flex: 1 / 3,
-    alignItems: 'center',
+    flex: 1 / 6,
   },
   optionsContainer: {
-    position: 'absolute',
-    bottom: 80,
+    flex: 1 / 6,
   },
   optionsRow: {
     alignItems: 'center',
