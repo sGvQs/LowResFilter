@@ -31,7 +31,7 @@ export default function ImageViewer({
       // ここでuriが存在するかチェック
       RNImage.getSize(imageSource.uri, (width, height) => {
         const aspectRatio = height / width;
-        const magnification = Platform.OS === 'web' ? 0.7 : 0.5;
+        const magnification = Platform.OS === 'web' ? 1 : 0.5;
         if (height > width) {
           // 縦長イメージ
           setImageSize({

@@ -31,7 +31,7 @@ export default function AboutScreen() {
         ようこそ！このアプリは、ただの「レトロなフィルター」ではありません。画像を「荒く」編集するのが特徴なフィルターです。
         世の中にはたくさんのレトロフィルターがありますが、どの「レトロなフィルター」もレトロ風の雰囲気しか兼ね備えておらず、
         実際の1900年代~2000年代のカメラの感じとはかなり違うと感じました。
-        そこで僕は本物の古いカメラのフィルムを追求したかったのでリアルに荒い画素でレトロ感を出すアプリを作ることにしました💁‍♀️。
+        そこで僕は本物の古いカメラのフィルムを追求したかったのでリアルに荒い画素でレトロ感を出すアプリを作ることにしました。
       </Typewriter>
       {showAnnouncement && (
         <Typewriter
@@ -62,14 +62,14 @@ const styles = StyleSheet.create({
     fontFamily: 'PressStart2P',
   },
   text: {
-    maxWidth: Platform.OS === 'web' ? 600 : 300,
+    maxWidth: Platform.OS === 'web' ? 800 : 300,
     paddingTop: Platform.OS === 'web' ? 60 : 30,
     fontSize: 20,
     color: '#fff',
     fontFamily: 'PressStart2P',
   },
   announcement: {
-    maxWidth: Platform.OS === 'web' ? 600 : 300,
+    maxWidth: Platform.OS === 'web' ? 800 : 300,
     paddingTop: Platform.OS === 'web' ? 40 : 20,
     fontSize: 16,
     color: '#a59a3b',

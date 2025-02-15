@@ -30,23 +30,29 @@ export type filterType =
   | 'iPhone 3G';
 
 export default function Photo() {
-  // ユーザーがアップロードした写真
+  // ユーザーがアップロードした写真（Base64 エンコード）
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     undefined
   );
 
+  // ユーザーがアップロードした写真のバックアップ（Base64 エンコード）
+  const [selectedImageBackup, setSelectedImageBackup] = useState<
+    string | undefined
+  >(undefined);
+
+  // 選ばれた写真のサイズ
+  const [imageSize, setImageSize] = useState<importedImageSize | null>(null);
+
   // [表示非表示] 写真をカスタマイズできる画面（アップロード => true）
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
 
-  // [表示非表示] 絵文字を選択できるモーダル
+  // [表示非表示] 絵文字を選択できるモーダル（「+」ボタン押下 => true）
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   // 選ばれた「フィルター」
   const [pickedFilter, setPickedFilter] = useState<filterType | undefined>(
     undefined
   );
-
-  const [imageSize, setImageSize] = useState<importedImageSize | null>(null);
 
   //（カメラロールなど）へのアクセス許可をリクエスト
   const [status, requestPermission] = MediaLibrary.usePermissions();
@@ -59,6 +65,11 @@ export default function Photo() {
     }
   }, [status]);
 
+  useEffect(() => {
+    console.log('pickedFilter', pickedFilter);
+    console.log('selectedImageBackup', selectedImageBackup);
+  }, [pickedFilter]);
+
   // 写真を選ぶ「Choose a photo」
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -68,6 +79,7 @@ export default function Photo() {
 
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+      setSelectedImageBackup(result.assets[0].uri);
       setShowAppOptions(true);
     } else {
       alert('You did not select any image.');
@@ -190,12 +202,15 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 3 / 4,
+    justifyContent: 'center',
   },
   footerContainer: {
     flex: 1 / 4,
+    justifyContent: 'center',
   },
   optionsContainer: {
     flex: 1 / 4,
+    justifyContent: 'center',
   },
   optionsRow: {
     alignItems: 'center',
