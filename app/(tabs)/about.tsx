@@ -1,3 +1,4 @@
+import { BlurView } from 'expo-blur';
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet, Text, Platform } from 'react-native';
 import Typewriter from 'react-native-typewriter';
@@ -8,11 +9,6 @@ export default function AboutScreen() {
   const announcementWaitingTime = useMemo(() => {
     if (Platform.OS !== 'web') return 12000;
     return 9000;
-  }, []);
-
-  const textMaxWidth = useMemo(() => {
-    if (Platform.OS !== 'web') return 300;
-    return 500;
   }, []);
 
   useEffect(() => {
