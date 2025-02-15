@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { StyleSheet, FlatList, Platform, Pressable, Text } from 'react-native';
 import { filterType } from '@/app/(tabs)/photo';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 type Props = {
   onSelect: (name: filterType) => void;
@@ -8,29 +10,40 @@ type Props = {
 };
 
 export default function FilterList({ onSelect, onCloseModal }: Props) {
-  // const [emoji] = useState<ImageSource[]>([
-  //   require('../assets/images/emoji1.png'),
-  //   require('../assets/images/emoji2.png'),
-  //   require('../assets/images/emoji3.png'),
-  //   require('../assets/images/emoji4.png'),
-  //   require('../assets/images/emoji5.png'),
-  //   require('../assets/images/emoji6.png'),
-  // ]);
+  type FilterObject = { icon: ReactNode; name: filterType };
 
-  type EmojiObject = { icon: string; name: filterType };
-
-  const [filterObject] = useState<EmojiObject[]>([
-    { icon: '🏠', name: 'home' },
-    { icon: '🏡', name: 'house' },
-    { icon: '🏘️', name: 'houses' },
-    { icon: '⛰️', name: 'mountain' },
+  const [filter] = useState<FilterObject[]>([
+    {
+      icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
+      name: '1970s',
+    },
+    {
+      icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
+      name: '1980s',
+    },
+    {
+      icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
+      name: '1990s',
+    },
+    {
+      icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
+      name: '2000s',
+    },
+    {
+      icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
+      name: 'iPhone',
+    },
+    {
+      icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
+      name: 'iPhone 3G',
+    },
   ]);
 
   return (
     <FlatList
       horizontal
       showsHorizontalScrollIndicator={Platform.OS === 'web'}
-      data={filterObject}
+      data={filter}
       contentContainerStyle={styles.listContainer}
       renderItem={({ item, index }) => (
         <Pressable
@@ -39,9 +52,7 @@ export default function FilterList({ onSelect, onCloseModal }: Props) {
             onCloseModal();
           }}
         >
-          <Text key={index + ': icon'} style={styles.image}>
-            {item.icon}
-          </Text>
+          {item.icon}
           <Text key={index + ': name'} style={styles.text}>
             {item.name}
           </Text>
@@ -59,15 +70,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  image: {
-    fontSize: 100,
-    marginRight: 20,
+    gap: 50,
   },
   text: {
-    fontSize: 16,
+    fontSize: 12,
     textAlign: 'center',
-    marginTop: 20,
     fontWeight: 'bold',
+    marginTop: 10,
   },
 });

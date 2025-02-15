@@ -20,7 +20,14 @@ export type importedImageSize = {
   height: number;
 };
 
-export type filterType = 'home' | 'house' | 'houses' | 'mountain';
+export type filterType =
+  | '1960s'
+  | '1970s'
+  | '1980s'
+  | '1990s'
+  | '2000s'
+  | 'iPhone'
+  | 'iPhone 3G';
 
 export default function Photo() {
   // ユーザーがアップロードした写真
