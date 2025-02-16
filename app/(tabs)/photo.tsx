@@ -1,6 +1,6 @@
 import { View, StyleSheet, Platform, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
@@ -12,6 +12,8 @@ import IconButton from '@/components/IconButton';
 import CircleButton from '@/components/CircleButton';
 import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
+import { LowResCreator } from '@/components/LowResCreator';
+import { ImageManipulator, useImageManipulator } from 'expo-image-manipulator';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
@@ -65,9 +67,19 @@ export default function Photo() {
     }
   }, [status]);
 
+  // filterを決めた時の処理
   useEffect(() => {
-    console.log('pickedFilter', pickedFilter);
-    console.log('selectedImageBackup', selectedImageBackup);
+    const processImage = async () => {
+      try {
+        const lowResImage =
+          selectedImageBackup && (await LowResCreator(selectedImageBackup));
+        lowResImage && setSelectedImage(lowResImage);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    processImage();
   }, [pickedFilter]);
 
   // 写真を選ぶ「Choose a photo」

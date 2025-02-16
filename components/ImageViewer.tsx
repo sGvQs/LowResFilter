@@ -1,4 +1,4 @@
-import { useEffect, Dispatch, SetStateAction } from 'react';
+import { useEffect, Dispatch, SetStateAction, useCallback } from 'react';
 import {
   StyleSheet,
   Image as RNImage,
@@ -26,28 +26,43 @@ export default function ImageViewer({
 }: Props) {
   const imageSource = selectedImage ? { uri: selectedImage } : imgSource;
 
+  const updateImageSize = useCallback((size: importedImageSize) => {
+    setImageSize((prevSize) =>
+      prevSize?.width === size.width && prevSize?.height === size.height
+        ? prevSize
+        : size
+    );
+  }, []);
+
   useEffect(() => {
     if (imageSource?.uri) {
-      // ここでuriが存在するかチェック
+      console.log('imageSource?.uri', imageSource?.uri);
+
       RNImage.getSize(imageSource.uri, (width, height) => {
         const aspectRatio = height / width;
         const magnification = Platform.OS === 'web' ? 1 : 0.5;
+
+        let newSize: importedImageSize = { width: 0, height: 0 };
+
         if (height > width) {
           // 縦長イメージ
-          setImageSize({
+          newSize = {
             width: SCREEN_WIDTH * 0.8,
             height: SCREEN_WIDTH * aspectRatio * 0.8,
-          });
+          };
         } else {
           // 横長イメージ
-          setImageSize({
+          newSize = {
             width: SCREEN_HEIGHT * aspectRatio * magnification,
             height: SCREEN_HEIGHT * magnification,
-          });
+          };
         }
+
+        // すでに設定されている値と同じなら state 更新しない
+        updateImageSize(newSize);
       });
     }
-  }, [imageSource]);
+  }, [imageSource, updateImageSize]); // imageSource だけを依存配列に入れる
 
   // デフォルト時
   if (!selectedImage) {
