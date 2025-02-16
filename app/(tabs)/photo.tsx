@@ -14,7 +14,7 @@ import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
 import { LowResCreator } from '@/utils/LowResCreator';
 import { Lenses } from '@/utils/Lenses';
-import { ImportedImageSize } from '@/utils/types/ImportedImageSizeType';
+import { ImportedImageSizeType } from '@/utils/types/ImportedImageSizeType';
 import { LensesType } from '@/utils/types/LensesType';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
@@ -31,7 +31,9 @@ export default function Photo() {
   >(undefined);
 
   // 選ばれた写真のサイズ
-  const [imageSize, setImageSize] = useState<ImportedImageSize | null>(null);
+  const [imageSize, setImageSize] = useState<ImportedImageSizeType | null>(
+    null
+  );
 
   // [表示非表示] 写真をカスタマイズできる画面（アップロード => true）
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);

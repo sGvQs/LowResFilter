@@ -1,10 +1,10 @@
-import { ImportedImageSize } from './types/ImportedImageSizeType';
+import { ImportedImageSizeType } from './types/ImportedImageSizeType';
 import { LensesConfigType } from './types/LensesConfigType';
 import { LensesType } from './types/LensesType';
 
 export const Lenses = (
   pickedFilter: LensesType,
-  imageSize: ImportedImageSize
+  imageSize: ImportedImageSizeType
 ): LensesConfigType => {
   switch (pickedFilter) {
     case LensesType.filter_1960s:

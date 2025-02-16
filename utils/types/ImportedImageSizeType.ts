@@ -1,4 +1,4 @@
-export type ImportedImageSize = {
+export type ImportedImageSizeType = {
   width: number;
   height: number;
 };

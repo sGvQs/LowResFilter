@@ -6,7 +6,7 @@ import {
   Platform,
 } from 'react-native';
 import { Image, type ImageSource } from 'expo-image';
-import { importedImageSize } from '@/app/(tabs)/photo';
+import { ImportedImageSizeType } from '@/utils/types/ImportedImageSizeType';
 
 const SCREEN_WIDTH = Dimensions.get('window').width; // 画面の横幅を取得
 const SCREEN_HEIGHT = Dimensions.get('window').height; // 画面の縦幅を取得
@@ -14,8 +14,8 @@ const SCREEN_HEIGHT = Dimensions.get('window').height; // 画面の縦幅を取�
 type Props = {
   imgSource: ImageSource;
   selectedImage?: string;
-  setImageSize: Dispatch<SetStateAction<importedImageSize | null>>;
-  imageSize: importedImageSize | null;
+  setImageSize: Dispatch<SetStateAction<ImportedImageSizeType | null>>;
+  imageSize: ImportedImageSizeType | null;
 };
 
 export default function ImageViewer({
@@ -26,7 +26,7 @@ export default function ImageViewer({
 }: Props) {
   const imageSource = selectedImage ? { uri: selectedImage } : imgSource;
 
-  const updateImageSize = useCallback((size: importedImageSize) => {
+  const updateImageSize = useCallback((size: ImportedImageSizeType) => {
     setImageSize((prevSize) =>
       prevSize?.width === size.width && prevSize?.height === size.height
         ? prevSize
@@ -40,7 +40,7 @@ export default function ImageViewer({
         const aspectRatio = height / width;
         const magnification = Platform.OS === 'web' ? 1 : 0.5;
 
-        let newSize: importedImageSize = { width: 0, height: 0 };
+        let newSize: ImportedImageSizeType = { width: 0, height: 0 };
 
         if (height > width) {
           // 縦長イメージ
