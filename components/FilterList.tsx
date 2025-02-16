@@ -1,45 +1,45 @@
 import { ReactNode, useState } from 'react';
 import { StyleSheet, FlatList, Platform, Pressable, Text } from 'react-native';
-import { filterType } from '@/app/(tabs)/photo';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { LensesType } from '@/utils/types/LensesType';
 
 type Props = {
-  onSelect: (name: filterType) => void;
+  onSelect: (name: LensesType) => void;
   onCloseModal: () => void;
 };
 
 export default function FilterList({ onSelect, onCloseModal }: Props) {
-  type FilterObject = { icon: ReactNode; name: filterType };
+  type FilterObject = { icon: ReactNode; name: LensesType };
 
   const [filter] = useState<FilterObject[]>([
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: filterType.filter_1970s,
+      name: LensesType.filter_1970s,
     },
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: filterType.filter_1980s,
+      name: LensesType.filter_1980s,
     },
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: filterType.filter_1990s,
+      name: LensesType.filter_1990s,
     },
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: filterType.filter_2000s,
+      name: LensesType.filter_2000s,
     },
     {
       icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
-      name: filterType.filter_iphone,
+      name: LensesType.filter_iphone,
     },
     {
       icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
-      name: filterType.filter_iphone_3G,
+      name: LensesType.filter_iphone_3G,
     },
     {
       icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
-      name: filterType.filter_none,
+      name: LensesType.filter_none,
     },
   ]);
 

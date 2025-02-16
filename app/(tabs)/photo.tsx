@@ -1,13 +1,6 @@
 import { View, StyleSheet, Platform, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  ReactNode,
-  useMemo,
-} from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
@@ -21,31 +14,10 @@ import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
 import { LowResCreator } from '@/utils/LowResCreator';
 import { Lenses } from '@/utils/Lenses';
+import { ImportedImageSize } from '@/utils/types/ImportedImageSizeType';
+import { LensesType } from '@/utils/types/LensesType';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
-
-export type importedImageSize = {
-  width: number;
-  height: number;
-};
-
-export enum filterType {
-  filter_1960s = '1960s',
-  filter_1970s = '1970s',
-  filter_1980s = '1980s',
-  filter_1990s = '1990s',
-  filter_2000s = '2000s',
-  filter_iphone = 'iPhone',
-  filter_iphone_3G = 'iPhone 3G',
-  filter_none = 'default',
-}
-
-export type LensesConfig = {
-  width: number;
-  compress: number;
-  isDefault: boolean;
-  name: filterType;
-};
 
 export default function Photo() {
   // ユーザーがアップロードした写真（Base64 エンコード）
@@ -59,7 +31,7 @@ export default function Photo() {
   >(undefined);
 
   // 選ばれた写真のサイズ
-  const [imageSize, setImageSize] = useState<importedImageSize | null>(null);
+  const [imageSize, setImageSize] = useState<ImportedImageSize | null>(null);
 
   // [表示非表示] 写真をカスタマイズできる画面（アップロード => true）
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
@@ -68,7 +40,7 @@ export default function Photo() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   // 選ばれた「フィルター」
-  const [pickedFilter, setPickedFilter] = useState<filterType | undefined>(
+  const [pickedFilter, setPickedFilter] = useState<LensesType | undefined>(
     undefined
   );
 

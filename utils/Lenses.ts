@@ -1,66 +1,64 @@
-import {
-  filterType,
-  importedImageSize,
-  LensesConfig,
-} from '@/app/(tabs)/photo';
+import { ImportedImageSize } from './types/ImportedImageSizeType';
+import { LensesConfigType } from './types/LensesConfigType';
+import { LensesType } from './types/LensesType';
 
 export const Lenses = (
-  pickedFilter: filterType,
-  imageSize: importedImageSize
-): LensesConfig => {
+  pickedFilter: LensesType,
+  imageSize: ImportedImageSize
+): LensesConfigType => {
   switch (pickedFilter) {
-    case filterType.filter_1960s:
+    case LensesType.filter_1960s:
       return {
-        name: filterType.filter_1960s,
+        name: LensesType.filter_1960s,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_1970s:
+    case LensesType.filter_1970s:
       return {
-        name: filterType.filter_1970s,
+        name: LensesType.filter_1970s,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_1980s:
+    case LensesType.filter_1980s:
       return {
-        name: filterType.filter_1980s,
+        name: LensesType.filter_1980s,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_1990s:
+    case LensesType.filter_1990s:
       return {
-        name: filterType.filter_1990s,
+        name: LensesType.filter_1990s,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_2000s:
+    case LensesType.filter_2000s:
       return {
-        name: filterType.filter_2000s,
+        name: LensesType.filter_2000s,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_iphone:
+    case LensesType.filter_iphone:
       return {
-        name: filterType.filter_iphone,
+        name: LensesType.filter_iphone,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_iphone_3G:
+    case LensesType.filter_iphone_3G:
       return {
-        name: filterType.filter_iphone_3G,
+        name: LensesType.filter_iphone_3G,
         width: imageSize.width * 0.1,
         compress: 0.1,
         isDefault: false,
       };
-    case filterType.filter_none:
+    case LensesType.filter_none:
       return {
-        name: filterType.filter_none,
+        name: LensesType.filter_none,
         width: imageSize.width * 0,
         compress: 0,
         isDefault: true,
