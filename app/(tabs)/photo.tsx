@@ -1,6 +1,13 @@
 import { View, StyleSheet, Platform, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  ReactNode,
+  useMemo,
+} from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
@@ -12,8 +19,8 @@ import IconButton from '@/components/IconButton';
 import CircleButton from '@/components/CircleButton';
 import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
-import { LowResCreator } from '@/components/LowResCreator';
-import { ImageManipulator, useImageManipulator } from 'expo-image-manipulator';
+import { LowResCreator } from '@/utils/LowResCreator';
+import { Lenses } from '@/utils/Lenses';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
@@ -22,14 +29,23 @@ export type importedImageSize = {
   height: number;
 };
 
-export type filterType =
-  | '1960s'
-  | '1970s'
-  | '1980s'
-  | '1990s'
-  | '2000s'
-  | 'iPhone'
-  | 'iPhone 3G';
+export enum filterType {
+  filter_1960s = '1960s',
+  filter_1970s = '1970s',
+  filter_1980s = '1980s',
+  filter_1990s = '1990s',
+  filter_2000s = '2000s',
+  filter_iphone = 'iPhone',
+  filter_iphone_3G = 'iPhone 3G',
+  filter_none = 'default',
+}
+
+export type LensesConfig = {
+  width: number;
+  compress: number;
+  isDefault: boolean;
+  name: filterType;
+};
 
 export default function Photo() {
   // ユーザーがアップロードした写真（Base64 エンコード）
@@ -71,8 +87,13 @@ export default function Photo() {
   useEffect(() => {
     const processImage = async () => {
       try {
+        const lensesConfig =
+          pickedFilter && imageSize && Lenses(pickedFilter, imageSize);
+
         const lowResImage =
-          selectedImageBackup && (await LowResCreator(selectedImageBackup));
+          lensesConfig &&
+          selectedImageBackup &&
+          (await LowResCreator(selectedImageBackup, lensesConfig));
         lowResImage && setSelectedImage(lowResImage);
       } catch (error) {
         console.log(error);

@@ -15,27 +15,31 @@ export default function FilterList({ onSelect, onCloseModal }: Props) {
   const [filter] = useState<FilterObject[]>([
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: '1970s',
+      name: filterType.filter_1970s,
     },
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: '1980s',
+      name: filterType.filter_1980s,
     },
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: '1990s',
+      name: filterType.filter_1990s,
     },
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
-      name: '2000s',
+      name: filterType.filter_2000s,
     },
     {
       icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
-      name: 'iPhone',
+      name: filterType.filter_iphone,
     },
     {
       icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
-      name: 'iPhone 3G',
+      name: filterType.filter_iphone_3G,
+    },
+    {
+      icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
+      name: filterType.filter_none,
     },
   ]);
 

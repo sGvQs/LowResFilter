@@ -1,3 +1,4 @@
+import { LensesConfig } from '@/app/(tabs)/photo';
 import {
   ImageManipulator,
   ImageManipulatorContext,
@@ -6,18 +7,22 @@ import {
 import { Platform } from 'react-native';
 
 export const LowResCreator = async (
-  imageUri: string
+  imageUri: string,
+  lensesConfig: LensesConfig
 ): Promise<string | null> => {
   try {
+    if (lensesConfig.isDefault) return imageUri;
     const imageManipulatorContext: ImageManipulatorContext =
       await ImageManipulator.manipulate(imageUri);
-    imageManipulatorContext.resize({ width: 100 });
+    imageManipulatorContext.resize({ width: lensesConfig.width });
 
     // renderAsync() で画像を処理した後、ImageRef を取得
     const imageRef: ImageRef = await imageManipulatorContext.renderAsync();
 
     // ImageRef から URI を取得
-    const resultUri = (await imageRef.saveAsync()).uri;
+    const resultUri = (
+      await imageRef.saveAsync({ compress: lensesConfig.compress })
+    ).uri;
 
     // web以外の場合はそのままuriを返す
     if (Platform.OS !== 'web') {
