@@ -12,8 +12,8 @@ import IconButton from '@/components/IconButton';
 import CircleButton from '@/components/CircleButton';
 import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
-import { LowResCreator } from '@/utils/LowResCreator';
-import { Lenses } from '@/utils/Lenses';
+import { CreateEditImage } from '@/utils/CreateEditImage';
+import { CreatePickedLens } from '@/utils/CreatePickedLens';
 import { ImportedImageSizeType } from '@/utils/types/ImportedImageSizeType';
 import { LensesType } from '@/utils/types/LensesType';
 
@@ -61,14 +61,20 @@ export default function Photo() {
   useEffect(() => {
     const processImage = async () => {
       try {
-        const lensesConfig =
-          pickedFilter && imageSize && Lenses(pickedFilter, imageSize);
+        // レンズの設定を取得
+        const lensConfig =
+          pickedFilter &&
+          imageSize &&
+          CreatePickedLens(pickedFilter, imageSize);
 
-        const lowResImage =
-          lensesConfig &&
+        // 編集した画像を取得
+        const editImage =
+          lensConfig &&
           selectedImageBackup &&
-          (await LowResCreator(selectedImageBackup, lensesConfig));
-        lowResImage && setSelectedImage(lowResImage);
+          (await CreateEditImage(selectedImageBackup, lensConfig));
+
+        // 編集した画像を描画
+        editImage && setSelectedImage(editImage);
       } catch (error) {
         console.log(error);
       }

@@ -2,7 +2,7 @@ import { ImportedImageSizeType } from './types/ImportedImageSizeType';
 import { LensesConfigType } from './types/LensesConfigType';
 import { LensesType } from './types/LensesType';
 
-export const Lenses = (
+export const CreatePickedLens = (
   pickedFilter: LensesType,
   imageSize: ImportedImageSizeType
 ): LensesConfigType => {

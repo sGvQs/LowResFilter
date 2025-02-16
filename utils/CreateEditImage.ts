@@ -6,7 +6,7 @@ import {
 import { Platform } from 'react-native';
 import { LensesConfigType } from './types/LensesConfigType';
 
-export const LowResCreator = async (
+export const CreateEditImage = async (
   imageUri: string,
   lensesConfigType: LensesConfigType
 ): Promise<string | null> => {
