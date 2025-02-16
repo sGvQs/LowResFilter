@@ -36,8 +36,6 @@ export default function ImageViewer({
 
   useEffect(() => {
     if (imageSource?.uri) {
-      console.log('imageSource?.uri', imageSource?.uri);
-
       RNImage.getSize(imageSource.uri, (width, height) => {
         const aspectRatio = height / width;
         const magnification = Platform.OS === 'web' ? 1 : 0.5;

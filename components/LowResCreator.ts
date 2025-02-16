@@ -1,83 +1,57 @@
 import {
-  manipulateAsync,
-  FlipType,
-  SaveFormat,
-  useImageManipulator,
   ImageManipulator,
+  ImageManipulatorContext,
+  ImageRef,
 } from 'expo-image-manipulator';
-import * as FileSystem from 'expo-file-system';
 import { Platform } from 'react-native';
 
 export const LowResCreator = async (
   imageUri: string
 ): Promise<string | null> => {
   try {
-    console.log('manipulate run');
-    const ctx = await ImageManipulator.manipulate(imageUri);
-    ctx.resize({ width: 100 });
+    const imageManipulatorContext: ImageManipulatorContext =
+      await ImageManipulator.manipulate(imageUri);
+    imageManipulatorContext.resize({ width: 100 });
 
     // renderAsync() で画像を処理した後、ImageRef を取得
-    const result = await ctx.renderAsync();
+    const imageRef: ImageRef = await imageManipulatorContext.renderAsync();
 
     // ImageRef から URI を取得
-    const resultUri = (await result.saveAsync()).uri;
-
-    console.log('Image URI:', resultUri);
+    const resultUri = (await imageRef.saveAsync()).uri;
 
     // web以外の場合はそのままuriを返す
     if (Platform.OS !== 'web') {
       return resultUri;
     }
 
-    const base64 = await convertUriToBase64Web(resultUri);
+    const canvas = document.createElement('canvas'); // 使い回す
+    const context = canvas.getContext('2d');
+
+    // webの場合はbase64に変換
+    const base64 = await convertUriToBase64Web(resultUri, canvas, context);
 
     // webの場合はbase64を返す
     return base64;
   } catch (error) {
-    console.log('エラーになってるよ', error);
+    console.log('expo-image-manipulator error', error);
     return null;
   }
 };
 
-// const checkFileExistence = async (uri: string) => {
-//   try {
-//     const fileInfo = await FileSystem.getInfoAsync(uri);
-//     if (fileInfo.exists) {
-//       console.log('ファイルが見つかりました:', fileInfo.uri);
-//     } else {
-//       console.log('ファイルが見つかりません:', uri);
-//     }
-//   } catch (error) {
-//     console.log('エラーが発生しました:', error);
-//   }
-// };
-
-const convertUriToBase64Phones = async (uri: string) => {
-  try {
-    // 圧縮された画像を Base64 文字列に変換
-    console.log('run readAsStringAsync');
-    const base64 = await FileSystem.readAsStringAsync(uri, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-
-    console.log('done readAsStringAsync', base64);
-    return base64;
-  } catch (error) {
-    console.error('圧縮またはBase64変換エラー:', error);
-    return null;
-  }
-};
-
-const convertUriToBase64Web = (uri: string) => {
-  return new Promise<string | null>((resolve, reject) => {
+const convertUriToBase64Web = (
+  uri: string,
+  canvas: HTMLCanvasElement,
+  context: CanvasRenderingContext2D | null
+): Promise<string | null> => {
+  return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = uri;
     image.onload = () => {
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
       if (context) {
+        // すでに渡された canvas と context を使う
         canvas.width = image.width;
         canvas.height = image.height;
+        context.clearRect(0, 0, canvas.width, canvas.height); // クリア
         context.drawImage(image, 0, 0);
         const base64 = canvas.toDataURL(); // base64に変換
         resolve(base64);
