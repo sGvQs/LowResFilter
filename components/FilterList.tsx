@@ -38,7 +38,7 @@ export default function FilterList({ onSelect, onCloseModal }: Props) {
       name: LensesType.filter_iphone_3G,
     },
     {
-      icon: <MaterialIcons name={'smartphone'} color={'#000'} size={100} />,
+      icon: <MaterialIcons name={'cameraswitch'} color={'#000'} size={100} />,
       name: LensesType.filter_none,
     },
   ]);
