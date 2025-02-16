@@ -1,4 +1,4 @@
-import { View, StyleSheet, Platform, Text } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState, useRef, useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -158,7 +158,15 @@ export default function Photo() {
       {/* イメージのコンテナー */}
       <View style={styles.imageContainer}>
         {/* イメージ『例：編集済み写真 */}
-        <View ref={imageRef} collapsable={false}>
+        <View
+          ref={imageRef}
+          collapsable={false}
+          style={{
+            flex: 2 / 3,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           {/* イメージ『例：アップロード写真』 */}
           <ImageViewer
             imgSource={PlaceholderImage}
@@ -212,6 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#3b6ea5',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   imageContainer: {
     flex: 3 / 4,

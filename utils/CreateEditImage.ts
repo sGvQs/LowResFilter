@@ -1,4 +1,5 @@
 import {
+  ActionCrop,
   ImageManipulator,
   ImageManipulatorContext,
   ImageRef,
@@ -13,8 +14,9 @@ export const CreateEditImage = async (
   try {
     if (lensesConfigType.isDefault) return imageUri;
     const imageManipulatorContext: ImageManipulatorContext =
-      await ImageManipulator.manipulate(imageUri);
-    imageManipulatorContext.resize({ width: lensesConfigType.width });
+      await ImageManipulator.manipulate(imageUri).resize({
+        width: lensesConfigType.width,
+      });
 
     // renderAsync() で画像を処理した後、ImageRef を取得
     const imageRef: ImageRef = await imageManipulatorContext.renderAsync();
