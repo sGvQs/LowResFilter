@@ -158,15 +158,7 @@ export default function Photo() {
       {/* イメージのコンテナー */}
       <View style={styles.imageContainer}>
         {/* イメージ『例：編集済み写真 */}
-        <View
-          ref={imageRef}
-          collapsable={false}
-          style={{
-            flex: 2 / 3,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <View ref={imageRef} collapsable={false}>
           {/* イメージ『例：アップロード写真』 */}
           <ImageViewer
             imgSource={PlaceholderImage}
@@ -174,10 +166,6 @@ export default function Photo() {
             setImageSize={setImageSize}
             imageSize={imageSize}
           />
-          {/* イメージ『例：ステッカー』 */}
-          {/* {pickedEmoji && (
-            <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
-          )} */}
         </View>
       </View>
       {/* フッターのコンテナー */}
@@ -225,6 +213,8 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 3 / 4,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
   },
   footerContainer: {
     flex: 1 / 4,

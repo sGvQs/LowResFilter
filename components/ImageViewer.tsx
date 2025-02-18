@@ -73,11 +73,7 @@ export default function ImageViewer({
   }
 
   return (
-    <Image
-      source={imageSource}
-      style={[styles.selectedImage, imageSize]}
-      contentFit="contain"
-    />
+    <Image source={imageSource} style={[imageSize]} contentFit="contain" />
   );
 }
 
@@ -85,8 +81,5 @@ const styles = StyleSheet.create({
   defaultImage: {
     width: 320,
     height: 440,
-  },
-  selectedImage: {
-    marginTop: Platform.OS === 'web' ? 0 : 50,
   },
 });
