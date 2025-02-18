@@ -10,7 +10,7 @@ export const CreatePickedLens = (
     case LensesType.filter_1960s:
       return {
         name: LensesType.filter_1960s,
-        width: imageSize.width * 0.1,
+        width: imageSize.width * 0.4,
         compress: 0.3 / 12,
         isDefault: false,
       };

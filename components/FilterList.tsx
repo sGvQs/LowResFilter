@@ -15,6 +15,10 @@ export default function FilterList({ onSelect, onCloseModal }: Props) {
   const [filter] = useState<FilterObject[]>([
     {
       icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
+      name: LensesType.filter_1960s,
+    },
+    {
+      icon: <FontAwesome6 name={'camera-retro'} color={'#000'} size={100} />,
       name: LensesType.filter_1970s,
     },
     {
