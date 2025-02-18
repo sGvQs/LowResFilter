@@ -1,10 +1,5 @@
 import { useEffect, Dispatch, SetStateAction, useCallback } from 'react';
-import {
-  StyleSheet,
-  Image as RNImage,
-  Dimensions,
-  Platform,
-} from 'react-native';
+import { StyleSheet, Image as RNImage, Dimensions } from 'react-native';
 import { Image, type ImageSource } from 'expo-image';
 import { ImportedImageSizeType } from '@/utils/types/ImportedImageSizeType';
 
@@ -37,22 +32,21 @@ export default function ImageViewer({
   useEffect(() => {
     if (imageSource?.uri) {
       RNImage.getSize(imageSource.uri, (width, height) => {
-        const aspectRatio = height / width;
-        const magnification = Platform.OS === 'web' ? 1 : 0.5;
-
         let newSize: ImportedImageSizeType = { width: 0, height: 0 };
 
         if (height > width) {
           // 縦長イメージ
+          let y = SCREEN_HEIGHT / height;
           newSize = {
-            width: SCREEN_WIDTH * 0.8,
-            height: SCREEN_WIDTH * aspectRatio * 0.8,
+            width: width * y * 0.5,
+            height: height * y * 0.5,
           };
         } else {
           // 横長イメージ
+          let x = SCREEN_WIDTH / width;
           newSize = {
-            width: SCREEN_HEIGHT * aspectRatio * magnification,
-            height: SCREEN_HEIGHT * magnification,
+            width: width * x * 0.8,
+            height: height * x * 0.8,
           };
         }
 

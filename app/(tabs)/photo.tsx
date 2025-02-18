@@ -140,10 +140,11 @@ export default function Photo() {
         const dataUrl = await domtoimage.toJpeg(imageRef.current, {
           quality: 1,
           width: imageSize?.width,
-          height: imageSize?.height,
+          heigth: imageSize?.height,
         });
 
         let link = document.createElement('a');
+
         link.download = 'low-res-filter.jpeg';
         link.href = dataUrl;
         link.click();
@@ -158,7 +159,7 @@ export default function Photo() {
       {/* イメージのコンテナー */}
       <View style={styles.imageContainer}>
         {/* イメージ『例：編集済み写真 */}
-        <View ref={imageRef} collapsable={false}>
+        <View ref={imageRef} collapsable={false} style={{ overflow: 'hidden' }}>
           {/* イメージ『例：アップロード写真』 */}
           <ImageViewer
             imgSource={PlaceholderImage}
@@ -214,7 +215,6 @@ const styles = StyleSheet.create({
     flex: 3 / 4,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   footerContainer: {
     flex: 1 / 4,
