@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, Animated } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useState } from 'react';
 import { ColorsType } from '@/utils/types/ColorsType';
+import PressableAnimaionView from './PressableAnimation';
 
 type Props = {
   onPress: () => void;
@@ -10,36 +11,15 @@ type Props = {
 };
 
 export default function IconButton({ onPress, label, icon }: Props) {
-  const [scale] = useState(new Animated.Value(1));
-
-  const handlePressIn = () => {
-    Animated.timing(scale, {
-      toValue: 0.9,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    Animated.timing(scale, {
-      toValue: 1,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
-    onPress();
-  };
-
   return (
-    <Animated.View style={[{ transform: [{ scale }] }, styles.buttonWrap]}>
-      <Pressable
-        style={styles.button}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-      >
-        <MaterialIcons name={icon} size={24} color="#000" style={styles.icon} />
-        <Text style={styles.buttonText}>{label}</Text>
-      </Pressable>
-    </Animated.View>
+    <PressableAnimaionView
+      onPress={() => onPress()}
+      animatedViewStyle={styles.buttonWrap}
+      pressableViewStyle={styles.button}
+    >
+      <MaterialIcons name={icon} size={24} color="#000" style={styles.icon} />
+      <Text style={styles.buttonText}>{label}</Text>
+    </PressableAnimaionView>
   );
 }
 

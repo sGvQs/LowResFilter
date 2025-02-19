@@ -6,7 +6,6 @@ import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
 import domtoimage from 'dom-to-image';
 
-import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
 import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
@@ -174,7 +173,7 @@ export default function Photo() {
         // 写真選択後
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
-            <IconButton icon="refresh" label="Reset" onPress={onReset} />
+            <IconButton icon="refresh" label="Back" onPress={onReset} />
             <IconButton icon="add" label="Add" onPress={onAddSticker} />
             <IconButton
               icon="save-alt"
@@ -186,12 +185,13 @@ export default function Photo() {
       ) : (
         // 写真選択前
         <View style={styles.footerContainer}>
-          <Button
-            theme="primary"
+          <IconButton
+            icon="camera-front"
             label="Choose a photo"
             onPress={pickImageAsync}
           />
-          <Button
+          <IconButton
+            icon="360"
             label="Use this photo"
             onPress={() => setShowAppOptions(true)}
           />
@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1 / 4,
     justifyContent: 'center',
+    gap: 20,
   },
   optionsContainer: {
     flex: 1 / 4,
