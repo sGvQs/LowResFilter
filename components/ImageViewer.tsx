@@ -45,8 +45,8 @@ export default function ImageViewer({
           // 横長イメージ
           let x = SCREEN_WIDTH / width;
           newSize = {
-            width: width * x * 0.8,
-            height: height * x * 0.8,
+            width: width * x * 0.6,
+            height: height * x * 0.6,
           };
         }
 

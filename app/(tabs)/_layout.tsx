@@ -2,14 +2,15 @@ import { Tabs } from 'expo-router';
 
 import Entypo from '@expo/vector-icons/Entypo';
 import { Platform } from 'react-native';
+import { ColorsType } from '@/utils/types/ColorsType';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#1500ff',
+        tabBarActiveTintColor: ColorsType.shock_blue,
         headerStyle: {
-          backgroundColor: '#3b6ea5',
+          backgroundColor: ColorsType.backgrond,
         },
         headerShadowVisible: false,
         headerTintColor: '#ffffff',

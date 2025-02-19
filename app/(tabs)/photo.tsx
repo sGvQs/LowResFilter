@@ -16,6 +16,7 @@ import { CreateEditImage } from '@/utils/CreateEditImage';
 import { CreatePickedLens } from '@/utils/CreatePickedLens';
 import { ImportedImageSizeType } from '@/utils/types/ImportedImageSizeType';
 import { LensesType } from '@/utils/types/LensesType';
+import { ColorsType } from '@/utils/types/ColorsType';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
@@ -198,7 +199,11 @@ export default function Photo() {
         </View>
       )}
       <FilterPicker isVisible={isModalVisible} onClose={onModalClose}>
-        <FilterList onSelect={setPickedFilter} onCloseModal={onModalClose} />
+        <FilterList
+          onSelect={setPickedFilter}
+          onCloseModal={onModalClose}
+          pickedFilter={pickedFilter}
+        />
       </FilterPicker>
     </GestureHandlerRootView>
   );
@@ -207,7 +212,7 @@ export default function Photo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3b6ea5',
+    backgroundColor: ColorsType.backgrond,
     alignItems: 'center',
     justifyContent: 'center',
   },
