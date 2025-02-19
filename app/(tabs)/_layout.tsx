@@ -9,19 +9,27 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: ColorsType.shock_blue,
+        tabBarInactiveTintColor: ColorsType.black,
         headerStyle: {
-          backgroundColor: ColorsType.backgrond,
+          backgroundColor: ColorsType.backgrond_blue,
         },
         headerShadowVisible: false,
-        headerTintColor: '#ffffff',
+        headerTintColor: ColorsType.white,
         tabBarStyle: {
-          backgroundColor: '#d4d0c7',
+          backgroundColor: ColorsType.modal_background,
           paddingHorizontal: Platform.OS === 'web' ? 10 : 0, // Web のみ余白をつける
+          borderWidth: 6,
+          borderTopWidth: 6,
+          borderRightColor: ColorsType.modal_shadow_black,
+          borderBottomColor: ColorsType.modal_shadow_black,
+          borderTopColor: ColorsType.modal_shadow_white,
+          borderLeftColor: ColorsType.modal_shadow_more_white,
         },
-        tabBarItemStyle:
-          Platform.OS === 'web'
-            ? { alignSelf: 'center', maxWidth: 100 } // Web のみ適用
-            : { justifyContent: 'center', alignItems: 'center' }, // iOS・Android は中央寄せ
+        tabBarItemStyle: {
+          alignItems: 'center',
+          justifyContent: Platform.OS === 'web' ? 'flex-start' : 'center',
+          maxWidth: Platform.OS === 'web' ? 100 : 'auto',
+        },
       }}
     >
       <Tabs.Screen

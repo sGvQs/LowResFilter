@@ -8,8 +8,6 @@ import domtoimage from 'dom-to-image';
 
 import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
-import IconButton from '@/components/IconButton';
-import CircleButton from '@/components/CircleButton';
 import FilterPicker from '@/components/FilterPicker';
 import FilterList from '@/components/FilterList';
 import { CreateEditImage } from '@/utils/CreateEditImage';
@@ -17,6 +15,7 @@ import { CreatePickedLens } from '@/utils/CreatePickedLens';
 import { ImportedImageSizeType } from '@/utils/types/ImportedImageSizeType';
 import { LensesType } from '@/utils/types/LensesType';
 import { ColorsType } from '@/utils/types/ColorsType';
+import IconButton from '@/components/IconButton';
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
@@ -176,7 +175,7 @@ export default function Photo() {
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
             <IconButton icon="refresh" label="Reset" onPress={onReset} />
-            <CircleButton onPress={onAddSticker} />
+            <IconButton icon="add" label="Add" onPress={onAddSticker} />
             <IconButton
               icon="save-alt"
               label="Save"
@@ -212,7 +211,7 @@ export default function Photo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: ColorsType.backgrond,
+    backgroundColor: ColorsType.backgrond_blue,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -232,5 +231,6 @@ const styles = StyleSheet.create({
   optionsRow: {
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 20,
   },
 });

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   modalContent: {
     height: '25%',
     width: '100%',
-    backgroundColor: ColorsType.modal_backgrond,
+    backgroundColor: ColorsType.backgrond_gray,
     position: 'absolute',
     bottom: 0,
     borderWidth: 4, // 1px の枠線

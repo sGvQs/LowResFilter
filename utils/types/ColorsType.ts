@@ -1,5 +1,8 @@
 export enum ColorsType {
-  backgrond = '#3b6ea5',
+  black = '#000',
+  white = '#fff',
+  backgrond_blue = '#3b6ea5',
+  backgrond_gray = '#d4d0c7',
   soft_blue = '#3b87a5',
   soft_sky_blue = '#3ba5a1',
   soft_emerald_green = '#3ba565',
@@ -15,5 +18,6 @@ export enum ColorsType {
   shock_green = '#00ff00',
   modal_shadow_black = '#2b2b2b',
   modal_shadow_white = '#dadada',
-  modal_backgrond = '#d4d0c7',
+  modal_shadow_more_white = '#f0f0f0',
+  modal_background = '#afafaf',
 }
