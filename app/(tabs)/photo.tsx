@@ -90,6 +90,7 @@ export default function Photo() {
     });
 
     if (!result.canceled) {
+      setPickedFilter(LensesType.filter_none);
       setSelectedImage(result.assets[0].uri);
       setSelectedImageBackup(result.assets[0].uri);
       setShowAppOptions(true);

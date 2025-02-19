@@ -8,7 +8,7 @@ type Props = {
   pressableViewStyle?: StyleProp<ViewStyle>;
 };
 
-export default function PressableAnimaionView({
+export default function PressableAnimationView({
   onPress,
   children,
   animatedViewStyle,
@@ -18,7 +18,7 @@ export default function PressableAnimaionView({
 
   const handlePressIn = () => {
     Animated.timing(scale, {
-      toValue: 0.9,
+      toValue: 0.7,
       duration: 100,
       useNativeDriver: true,
     }).start();
@@ -30,14 +30,14 @@ export default function PressableAnimaionView({
       duration: 100,
       useNativeDriver: true,
     }).start();
-    onPress();
   };
 
   return (
     <Animated.View style={[{ transform: [{ scale }] }, animatedViewStyle]}>
       <Pressable
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
+        onPress={onPress} // onPress は Pressable に任せる
+        onPressIn={handlePressIn} // アニメーションだけ
+        onPressOut={handlePressOut} // アニメーションだけ
         style={pressableViewStyle}
       >
         {children}

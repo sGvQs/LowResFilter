@@ -3,6 +3,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import BlurFilterView from './BlurFilterView';
 import { ColorsType } from '@/utils/types/ColorsType';
+import PressableAnimaionView from './PressableAnimation';
 
 type Props = PropsWithChildren<{
   isVisible: boolean;
@@ -16,9 +17,9 @@ export default function FilterPicker({ isVisible, children, onClose }: Props) {
         <BlurFilterView>
           <View style={styles.titleContainer}>
             <Text style={[styles.title]}>🫳 Choose a filter</Text>
-            <Pressable onPress={onClose}>
+            <PressableAnimaionView onPress={onClose}>
               <MaterialIcons name="close" color="#ffffff" size={22} />
-            </Pressable>
+            </PressableAnimaionView>
           </View>
           {children}
         </BlurFilterView>

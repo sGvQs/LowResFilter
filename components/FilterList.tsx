@@ -4,6 +4,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LensesType } from '@/utils/types/LensesType';
 import { ColorsType } from '@/utils/types/ColorsType';
+import PressableAnimaionView from './PressableAnimation';
 
 type Props = {
   onSelect: (name: LensesType) => void;
@@ -108,7 +109,7 @@ export default function FilterList({
       data={filter}
       contentContainerStyle={styles.listContainer}
       renderItem={({ item, index }) => (
-        <Pressable
+        <PressableAnimaionView
           onPress={() => {
             onSelect(item.name);
             onCloseModal();
@@ -118,7 +119,7 @@ export default function FilterList({
           <Text key={index + ': name'} style={[styles.text]}>
             {item.name}
           </Text>
-        </Pressable>
+        </PressableAnimaionView>
       )}
     />
   );
