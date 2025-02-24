@@ -59,20 +59,20 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: '#fff',
     fontWeight: 'bold',
-    fontFamily: 'PressStart2P',
+    fontFamily: 'Courier New',
   },
   text: {
     maxWidth: Platform.OS === 'web' ? 800 : 300,
     paddingTop: Platform.OS === 'web' ? 60 : 30,
     fontSize: 20,
     color: '#fff',
-    fontFamily: 'PressStart2P',
+    fontFamily: 'Courier New',
   },
   announcement: {
     maxWidth: Platform.OS === 'web' ? 800 : 300,
     paddingTop: Platform.OS === 'web' ? 40 : 20,
     fontSize: 16,
     color: '#a59a3b',
-    fontFamily: 'PressStart2P',
+    fontFamily: 'Courier New',
   },
 });

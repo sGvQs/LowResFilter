@@ -16,7 +16,7 @@ export default function FilterPicker({ isVisible, children, onClose }: Props) {
       <View style={styles.modalContent}>
         <BlurFilterView>
           <View style={styles.titleContainer}>
-            <Text style={[styles.title]}>🫳 Choose a filter</Text>
+            <Text style={[styles.title]}>🫳 フィルターを選ぶ</Text>
             <PressableAnimaionView onPress={onClose}>
               <MaterialIcons name="close" color="#ffffff" size={22} />
             </PressableAnimaionView>

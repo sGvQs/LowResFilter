@@ -82,7 +82,7 @@ export default function Photo() {
     processImage();
   }, [pickedFilter]);
 
-  // 写真を選ぶ「Choose a photo」
+  // 写真を選ぶ
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
@@ -95,7 +95,7 @@ export default function Photo() {
       setSelectedImageBackup(result.assets[0].uri);
       setShowAppOptions(true);
     } else {
-      alert('You did not select any image.');
+      alert('写真が選ばれませんでした。');
     }
   };
 
@@ -174,11 +174,15 @@ export default function Photo() {
         // 写真選択後
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
-            <IconButton icon="refresh" label="Back" onPress={onReset} />
-            <IconButton icon="add" label="Add" onPress={onAddSticker} />
+            <IconButton icon="refresh" label="もどる" onPress={onReset} />
+            <IconButton
+              icon="add"
+              label="フィルターを選ぶ"
+              onPress={onAddSticker}
+            />
             <IconButton
               icon="save-alt"
-              label="Save"
+              label="セーブ"
               onPress={onSaveImageAsync}
             />
           </View>
@@ -188,12 +192,12 @@ export default function Photo() {
         <View style={styles.footerContainer}>
           <IconButton
             icon="camera-front"
-            label="Choose a photo"
+            label="写真を選ぶ"
             onPress={pickImageAsync}
           />
           <IconButton
             icon="360"
-            label="Use this photo"
+            label="この写真を編集する"
             onPress={() => setShowAppOptions(true)}
           />
         </View>
@@ -233,6 +237,6 @@ const styles = StyleSheet.create({
   optionsRow: {
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 20,
+    gap: 5,
   },
 });

@@ -1,6 +1,5 @@
-import { Pressable, StyleSheet, Text, Animated } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useState } from 'react';
 import { ColorsType } from '@/utils/types/ColorsType';
 import PressableAnimaionView from './PressableAnimation';
 
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     borderLeftColor: ColorsType.modal_shadow_more_white,
     backgroundColor: ColorsType.modal_background,
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     borderRadius: 0,
   },
   icon: {

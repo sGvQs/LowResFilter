@@ -45,7 +45,8 @@
     "react-native-typewriter": "^0.7.0",
     "react-native-view-shot": "~4.0.3",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "13.12.5"
+    "react-native-webview": "13.12.5",
+    "expo-video": "~2.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
